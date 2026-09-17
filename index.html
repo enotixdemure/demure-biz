@@ -416,36 +416,36 @@
 
         const businesses = [
             // АЗС
-            { id: 1, name: "АЗС/Магазин механики №31", type: "АЗС", location: "Штат Arizona RP", discount: "0%", owner: "Raccoon_Demure" },
-            { id: 2, name: "АЗС/Магазин механики №261", type: "АЗС", location: "Штат Arizona RP", discount: "0%", owner: "Raccoon_Demure" },
-            { id: 3, name: "АЗС/Магазин механики №59", type: "АЗС", location: "Штат Arizona RP", discount: "0%", owner: "Raccoon_Demure" },
-            { id: 4, name: "АЗС №253", type: "АЗС", location: "Штат Arizona RP", discount: "0%", owner: "Win_Bet" },
-            { id: 5, name: "АЗС №355", type: "АЗС", location: "Штат Arizona RP", discount: "0%", owner: "Win_Bet" },
-            { id: 6, name: "АЗС №25", type: "АЗС", location: "Штат Arizona RP", discount: "0%", owner: "Nays_Demure" },
-            { id: 7, name: "АЗС №60", type: "АЗС", location: "Штат Arizona RP", discount: "0%", owner: "Nays_Demure" },
-            { id: 8, name: "АЗС №288", type: "АЗС", location: "Штат Arizona RP", discount: "0%", owner: "Nays_Demure" },
+            { id: 1, name: "АЗС/Магазин механики №31", type: "АЗС", location: "Лос-Сантос (ЛС)", discount: "80%", owner: "Raccoon_Demure" },
+            { id: 2, name: "АЗС/Магазин механики №261", type: "АЗС", location: "Грин таун (Мост ЛС-ЛВ)", discount: "80%", owner: "Raccoon_Demure" },
+            { id: 3, name: "АЗС/Магазин механики №59", type: "АЗС", location: "Лас-Вентурас (ЛВ)", discount: "80%", owner: "Raccoon_Demure" },
+            { id: 4, name: "АЗС №253", type: "АЗС", location: "Ферма новичков (Водная)", discount: "0%", owner: "Win_Bet" },
+            { id: 5, name: "АЗС №355", type: "АЗС", location: "Заброшенный аэропорт", discount: "90%", owner: "Win_Bet" },
+            { id: 6, name: "АЗС №25", type: "АЗС", location: "Сан-Фиеро (Свалка СФ)", discount: "88%", owner: "Nays_Demure" },
+            { id: 7, name: "АЗС №60", type: "АЗС", location: "Лас-Вентурас (ЛВ)", discount: "55%", owner: "Nays_Demure" },
+            { id: 8, name: "АЗС №288", type: "АЗС", location: "Лас-Вентурас (ЛВ)", discount: "50%", owner: "Nays_Demure" },
 
             // Закусочные
-            { id: 9, name: "Закусочная №109", type: "Закусочная", location: "Штат Arizona RP", discount: "10%", owner: "Tarik_Demure" },
-            { id: 10, name: "Закусочная №110", type: "Закусочная", location: "Штат Arizona RP", discount: "0%", owner: "Tarik_Demure" },
-            { id: 11, name: "Закусочная №114", type: "Закусочная", location: "Штат Arizona RP", discount: "0%", owner: "Tarik_Demure" },
-            { id: 12, name: "Закусочная №50", type: "Закусочная", location: "Штат Arizona RP", discount: "0%", owner: "Hazard_Demure" },
-            { id: 13, name: "Закусочная №80", type: "Закусочная", location: "Штат Arizona RP", discount: "0%", owner: "Blaze_Demure" },
-            { id: 14, name: "Закусочная №358", type: "Закусочная", location: "Штат Arizona RP", discount: "0%", owner: "Blaze_Demure" },
-            { id: 15, name: "Закусочная №167", type: "Закусочная", location: "Штат Arizona RP", discount: "0%", owner: "Win_Bet" },
-            { id: 16, name: "Закусочная №169", type: "Закусочная", location: "Штат Arizona RP", discount: "0%", owner: "Astra_Reckless" },
-            { id: 17, name: "Закусочная №168", type: "Закусочная", location: "Штат Arizona RP", discount: "0%", owner: "Feo_Zotti" },
+            { id: 9, name: "Закусочная №109", type: "Закусочная", location: "Сан-Фиеро (СФ)", discount: "90%", owner: "Tarik_Demure" },
+            { id: 10, name: "Закусочная №110", type: "Закусочная", location: "Сан-Фиеро (СФ)", discount: "70%", owner: "Tarik_Demure" },
+            { id: 11, name: "Закусочная №114", type: "Закусочная", location: "Гора Чилиад (СФ)", discount: "50%", owner: "Tarik_Demure" },
+            { id: 12, name: "Закусочная №50", type: "Закусочная", location: "Лос-Сантос (Центральный рынок ЛС)", discount: "90%", owner: "Hazard_Demure" },
+            { id: 13, name: "Закусочная №80", type: "Закусочная", location: "Лас-Вентурас (ЛВ)", discount: "50%", owner: "Blaze_Demure" },
+            { id: 14, name: "Закусочная №358", type: "Закусочная", location: "Гора Чилиад (СФ)", discount: "50%", owner: "Blaze_Demure" },
+            { id: 15, name: "Закусочная №167", type: "Закусочная", location: "Лос-Сантос (Гетто респа Ацтек)", discount: "90%", owner: "Win_Bet" },
+            { id: 16, name: "Закусочная №169", type: "Закусочная", location: "Половино-Крик (ПК)", discount: "90%", owner: "Astra_Reckless" },
+            { id: 17, name: "Закусочная №168", type: "Закусочная", location: "Ред-Каунтри (Ферма новичков РК)", discount: "50%", owner: "Feo_Zotti" },
 
             // 24/7 / Закупки
-            { id: 18, name: "Магазин 24/7 №102", type: "24/7", location: "Штат Arizona RP", discount: "0%", owner: "Matvey_Demure" },
-            { id: 19, name: "Закупка №353", type: "24/7", location: "Штат Arizona RP", discount: "0%", owner: "Hazard_Demure" },
-            { id: 20, name: "Закупка №17", type: "24/7", location: "Штат Arizona RP", discount: "0%", owner: "Hazard_Demure" },
-            { id: 21, name: "Закупка №75", type: "24/7", location: "Штат Arizona RP", discount: "0%", owner: "Win_Bet" },
-            { id: 22, name: "Закупка №11", type: "24/7", location: "Штат Arizona RP", discount: "0%", owner: "Feo_Zotti" },
-            { id: 23, name: "Закупка №176", type: "24/7", location: "Штат Arizona RP", discount: "0%", owner: "Feo_Zotti" },
+            { id: 18, name: "Магазин 24/7 №102", type: "24/7", location: "Сан-Фиеро (СФ около Страховой компании)", discount: "50%", owner: "Matvey_Demure" },
+            { id: 19, name: "Закупка №353", type: "24/7", location: "Лос-Сантос (ЛС)", discount: "50%", owner: "Hazard_Demure" },
+            { id: 20, name: "Закупка №17", type: "24/7", location: "Гора Чилиад (СФ)", discount: "90%", owner: "Hazard_Demure" },
+            { id: 21, name: "Закупка №75", type: "24/7", location: "Лас-Вентурас (ЛВ)", discount: "90%", owner: "Win_Bet" },
+            { id: 22, name: "Закупка №11", type: "24/7", location: "Ред-Каунтри (Ферма новичков РК)", discount: "50%", owner: "Feo_Zotti" },
+            { id: 23, name: "Закупка №176", type: "24/7", location: "Сан-Фиеро (СФ)", discount: "50%", owner: "Feo_Zotti" },
 
             // Амуниция
-            { id: 24, name: "Аммуниция №2", type: "Амуниция", location: "Штат Arizona RP", discount: "0%", owner: "Feo_Zotti" },
+            { id: 24, name: "Аммуниция №2", type: "Амуниция", location: "Ред-Каунтри (Ферма новичков РК)", discount: "0%", owner: "Feo_Zotti" },
             
             // Частные
             { id: 25, name: "Страховая компания", type: "Частная", location: "Сан-Фиерро напротив банка", owner: "Raccoon_Demure" },
@@ -502,10 +502,7 @@
                 card.className = 'business-card';
                 card.style.animationDelay = `${index * 0.05}s`;
 
-                const bizId = extractId(biz.name);
-
                 let footerContent = '';
-                // Если скидка указана и она не "0%", отображаем плашку скидки
                 if (biz.discount && biz.discount !== "0%") {
                     footerContent = `
                         <div class="discount-tag">Скидка: ${biz.discount}</div>
@@ -517,6 +514,17 @@
                     `;
                 }
 
+                // Условие: если тип бизнеса не "Частная", выводим блок с командой /findibiz
+                let commandHTML = '';
+                if (biz.type.toLowerCase() !== 'частная') {
+                    const bizId = extractId(biz.name);
+                    commandHTML = `
+                        <div class="biz-command" onclick="copyFindCommand('${biz.name}', event)">
+                            📋 Скопировать команду: <code>/findibiz ${bizId}</code>
+                        </div>
+                    `;
+                }
+
                 card.innerHTML = `
                     <div class="biz-header">
                         <div class="biz-name">${biz.name}</div>
@@ -524,9 +532,7 @@
                     </div>
                     <div class="biz-info">
                         <div class="biz-info-row">📍 Локация: <span>${biz.location}</span></div>
-                        <div class="biz-command" onclick="copyFindCommand('${biz.name}', event)">
-                            📋 Скопировать команду: <code>/findibiz ${bizId}</code>
-                        </div>
+                        ${commandHTML}
                     </div>
                     <div class="card-footer">
                         ${footerContent}
