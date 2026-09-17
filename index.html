@@ -2,458 +2,423 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Syndicate VIP — Именинный Кликер</title>
-    <!-- Подключаем официальный скрипт Telegram Web App -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Elite Family | Businesses</title>
+    <!-- Telegram Web App JS -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <!-- Шрифты Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0b0b0e;
-            --card-bg: #16161c;
-            --gold: #d4af37;
-            --gold-light: #f3e5ab;
-            --text-main: #ffffff;
-            --text-muted: #8c8c9e;
-            --accent: #c5a059;
+            --bg-deep: #070709;
+            --bg-card: rgba(22, 22, 28, 0.7);
+            --bg-card-hover: rgba(30, 30, 38, 0.85);
+            --border-gold: rgba(212, 175, 55, 0.25);
+            --border-gold-hover: rgba(212, 175, 55, 0.6);
+            --gold-primary: #dfb953;
+            --gold-light: #fbe8a6;
+            --gold-dark: #9c7b23;
+            --text-main: #f3f3f6;
+            --text-muted: #94949f;
+            --shadow-gold: rgba(223, 185, 83, 0.12);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            user-select: none;
+            font-family: 'Montserrat', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--bg-color);
+            background-color: var(--bg-deep);
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(223, 185, 83, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(156, 123, 35, 0.04) 0%, transparent 40%);
             color: var(--text-main);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
+            padding-bottom: 110px;
+            overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        .phone-container {
-            width: 100%;
-            max-width: 400px;
-            height: 100%;
-            max-height: 800px;
-            background: var(--bg-color);
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            box-shadow: 0 0 40px rgba(212, 175, 55, 0.1);
-            overflow: hidden;
-        }
-
-        @media (min-width: 401px) {
-            .phone-container {
-                height: 85vh;
-                border-radius: 30px;
-                border: 2px solid #222;
-            }
-        }
-
+        /* Элитная шапка */
         .header {
-            padding: 20px;
             text-align: center;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 30px 16px 20px;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 20%;
+            width: 60%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-gold), transparent);
         }
 
         .header h1 {
-            font-size: 14px;
-            letter-spacing: 2px;
-            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 24px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 50%, var(--gold-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 6px;
+            text-shadow: 0 5px 25px rgba(223, 185, 83, 0.2);
+        }
+
+        .header p {
+            font-size: 11px;
+            color: var(--text-muted);
+            letter-spacing: 1.5px;
             text-transform: uppercase;
         }
 
-        .balance-box {
-            margin-top: 10px;
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--text-main);
+        /* Контейнер */
+        .container {
+            padding: 20px 16px;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .balance-box span {
-            color: var(--gold);
-        }
-
-        .content {
-            flex: 1;
-            overflow-y: auto;
-            padding: 20px;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .content.active {
-            display: flex;
-        }
-
-        .clicker-area {
-            margin: 30px 0;
-            text-align: center;
-        }
-
-        .coin-btn {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            background: radial-gradient(circle, #2a2512 0%, #111 80%);
-            border: 3px solid var(--gold);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 60px;
-            cursor: pointer;
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
-            transition: transform 0.1s ease, box-shadow 0.1s ease;
-        }
-
-        .coin-btn:active {
-            transform: scale(0.93);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
-        }
-
-        .stats-text {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-top: 10px;
-        }
-
-        .upgrades-list {
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        .upgrade-item {
-            background: var(--card-bg);
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            padding: 12px 15px;
-            border-radius: 12px;
+        .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 16px;
+            padding: 0 4px;
         }
 
-        .upgrade-info h4 {
-            font-size: 14px;
-            color: var(--text-main);
-        }
-
-        .upgrade-info p {
-            font-size: 11px;
-            color: var(--gold);
-            margin-top: 3px;
-        }
-
-        .buy-btn {
-            background: var(--gold);
-            color: #000;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 12px;
-            cursor: pointer;
-            transition: opacity 0.2s;
-        }
-
-        .buy-btn:hover {
-            opacity: 0.85;
-        }
-
-        .casino-box {
-            text-align: center;
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        .casino-box h2 {
-            font-size: 18px;
-            color: var(--gold);
-            margin-bottom: 10px;
-        }
-
-        .slot-machine {
-            background: var(--card-bg);
-            border: 2px solid var(--gold);
-            border-radius: 15px;
-            padding: 20px;
-            font-size: 32px;
-            margin: 20px 0;
-            letter-spacing: 10px;
-        }
-
-        .casino-btn {
-            background: linear-gradient(135deg, var(--gold), #997a25);
-            color: #000;
-            border: none;
-            width: 100%;
-            padding: 14px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--gold-primary);
             text-transform: uppercase;
+            letter-spacing: 1.5px;
         }
 
-        .nav-bar {
-            height: 70px;
-            background: var(--card-bg);
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        .biz-count {
+            font-size: 11px;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.03);
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Сетка карточек */
+        .grid-list {
             display: flex;
-            justify-content: space-around;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        /* Премиум карточка бизнеса */
+        .business-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-gold);
+            border-radius: 16px;
+            padding: 18px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        .business-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--gold-light), var(--gold-dark));
+        }
+
+        .business-card:hover {
+            border-color: var(--border-gold-hover);
+            background: var(--bg-card-hover);
+            box-shadow: 0 10px 40px var(--shadow-gold);
+            transform: translateY(-2px);
+        }
+
+        .biz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .biz-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: 0.5px;
+        }
+
+        .biz-type-badge {
+            font-size: 9px;
+            font-weight: 700;
+            background: linear-gradient(135deg, rgba(223, 185, 83, 0.15), rgba(156, 123, 35, 0.1));
+            color: var(--gold-light);
+            padding: 5px 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(223, 185, 83, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .biz-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 13px;
+            margin-bottom: 14px;
+        }
+
+        .biz-info-row {
+            display: flex;
             align-items: center;
+            color: var(--text-muted);
+        }
+
+        .biz-info-row span {
+            color: var(--text-main);
+            font-weight: 500;
+            margin-left: 8px;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 12px;
+        }
+
+        .discount-tag {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 50%, var(--gold-dark) 100%);
+            color: #0c0c0e;
+            font-weight: 800;
+            font-size: 11px;
+            padding: 6px 14px;
+            border-radius: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(223, 185, 83, 0.25);
+        }
+
+        .owner-info {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .owner-info span {
+            color: var(--gold-light);
+            font-weight: 600;
+        }
+
+        /* Нижняя фиксированная панель навигации */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 13, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-top: 1px solid var(--border-gold);
+            display: flex;
+            overflow-x: auto;
+            padding: 12px 10px;
+            gap: 8px;
+            z-index: 1000;
+            scrollbar-width: none;
+            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .bottom-nav::-webkit-scrollbar {
+            display: none;
         }
 
         .nav-item {
-            background: none;
-            border: none;
+            flex: 0 0 auto;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             color: var(--text-muted);
+            padding: 9px 16px;
+            border-radius: 12px;
             font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
             cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            transition: color 0.2s;
+            transition: all 0.3s ease;
+            text-align: center;
+            letter-spacing: 0.5px;
         }
 
         .nav-item.active {
-            color: var(--gold);
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 50%, var(--gold-dark) 100%);
+            color: #0c0c0e;
+            border-color: var(--gold-primary);
+            font-weight: 700;
+            box-shadow: 0 0 20px rgba(223, 185, 83, 0.35);
+            transform: translateY(-1px);
         }
 
-        .nav-item span {
-            font-size: 18px;
+        .no-results {
+            text-align: center;
+            padding: 50px 20px;
+            color: var(--text-muted);
+            font-size: 13px;
+            letter-spacing: 1px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px dashed var(--border-gold);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
-<div class="phone-container">
     <div class="header">
-        <h1>Syndicate VIP</h1>
-        <div class="balance-box"><span id="balance">...</span> ⭐️ Gold</div>
+        <h1>Family Syndicate</h1>
+        <p>Реестр предприятий и привилегий</p>
     </div>
 
-    <!-- Вкладка 1: Тапалка -->
-    <div id="tab-clicker" class="content active">
-        <div class="clicker-area">
-            <div class="coin-btn" id="clickBtn">🪙</div>
-            <div class="stats-text">Доход за клик: +<span id="clickPower">1</span> | Пассив: +<span id="passivePower">0</span>/сек</div>
+    <div class="container">
+        <div class="section-header">
+            <div class="section-title" id="current-category-title">Все бизнесы</div>
+            <div class="biz-count" id="biz-count">0 шт.</div>
         </div>
 
-        <div class="upgrades-list">
-            <div class="upgrade-item">
-                <div class="upgrade-info">
-                    <h4>Акции именинника</h4>
-                    <p>+1 к клику (Цена: <span id="p1-cost">50</span>)</p>
-                </div>
-                <button class="buy-btn" onclick="buyUpgrade(1)">Купить</button>
-            </div>
-            <div class="upgrade-item">
-                <div class="upgrade-info">
-                    <h4>Личный водитель</h4>
-                    <p>+5 Gold/сек (Цена: <span id="p2-cost">200</span>)</p>
-                </div>
-                <button class="buy-btn" onclick="buyUpgrade(2)">Купить</button>
-            </div>
-        </div>
+        <div class="grid-list" id="business-list"></div>
     </div>
 
-    <!-- Вкладка 2: Казино -->
-    <div id="tab-casino" class="content">
-        <div class="casino-box">
-            <h2>Рулетка удачи</h2>
-            <p class="stats-text">Испытай удачу: шанс умножить или потерять ставку (100 Gold)</p>
-            <div class="slot-machine" id="slotResult">🎰 🎰 🎰</div>
-            <button class="casino-btn" onclick="playCasino()">Крутить (100 ⭐️)</button>
-        </div>
+    <!-- Нижняя сетка типов бизнесов -->
+    <div class="bottom-nav" id="filter-nav">
+        <div class="nav-item active" onclick="filterBusinesses('all', this)">Все</div>
+        <div class="nav-item" onclick="filterBusinesses('АЗС', this)">АЗС</div>
+        <div class="nav-item" onclick="filterBusinesses('24/7', this)">24/7</div>
+        <div class="nav-item" onclick="filterBusinesses('Одежда', this)">Одежда</div>
+        <div class="nav-item" onclick="filterBusinesses('Амуниция', this)">Амуниция</div>
+        <div class="nav-item" onclick="filterBusinesses('Автосалон', this)">Автосалон</div>
     </div>
 
-    <!-- Вкладка 3: Аукцион -->
-    <div id="tab-auction" class="content">
-        <div class="casino-box">
-            <h2>Живой Аукцион</h2>
-            <p class="stats-text" style="margin-top: 15px;">Торги за эксклюзивные лоты от именинника начнутся в канун дня рождения!</p>
-            <div style="margin-top: 30px; padding: 20px; background: var(--card-bg); border-radius: 12px; border: 1px dashed var(--gold);">
-                <p style="color: var(--gold); font-weight: bold;">🔒 Лот скрыт</p>
-                <p class="stats-text" style="margin-top: 5px;">Копите монеты, чтобы перебить ставки других гостей.</p>
-            </div>
-        </div>
-    </div>
+    <script>
+        // Инициализация Telegram Web App
+        let tg = window.Telegram.WebApp;
+        tg.expand();
 
-    <!-- Навигация -->
-    <div class="nav-bar">
-        <button class="nav-item active" onclick="switchTab('clicker', this)">
-            <span>🪙</span>Тапать
-        </button>
-        <button class="nav-item" onclick="switchTab('casino', this)">
-            <span>🎲</span>Казино
-        </button>
-        <button class="nav-item" onclick="switchTab('auction', this)">
-            <span>🔨</span>Аукцион
-        </button>
-    </div>
-</div>
+        // База данных бизнесов (можно легко редактировать)
+        const businesses = [
+            {
+                id: 1,
+                name: "АЗС №4 (У казика)",
+                type: "АЗС",
+                location: "Район Казино / Лос-Сантос",
+                discount: "15%",
+                owner: "Raccoon_Demure"
+            },
+            {
+                id: 2,
+                name: "Магазин 24/7 №12",
+                type: "24/7",
+                location: "Центр Лос-Сантоса (возле банка)",
+                discount: "20%",
+                owner: " Syndicate Member"
+            },
+            {
+                id: 3,
+                name: "Амуниция г. Сан-Фиерро",
+                type: "Амуниция",
+                location: "Центральный рынок SF",
+                discount: "10%",
+                owner: " Syndicate Member"
+            },
+            {
+                id: 4,
+                name: "Магазин одежды Binco",
+                type: "Одежда",
+                location: "Южный район LS",
+                discount: "25%",
+                owner: "Raccoon_Demure"
+            },
+            {
+                id: 5,
+                name: "Премиум Автосалон",
+                type: "Автосалон",
+                location: "Элитный район LS",
+                discount: "5%",
+                owner: "Boss"
+            }
+        ];
 
-<script>
-    // Инициализация Telegram WebApp
-    const tg = window.Telegram.WebApp;
-    tg.expand();
+        function renderBusinesses(filter) {
+            const listContainer = document.getElementById('business-list');
+            const countContainer = document.getElementById('biz-count');
+            listContainer.innerHTML = '';
 
-    // Получаем данные пользователя из Telegram (или тестовые для ПК)
-    let userData = {
-        telegram_id: tg.initDataUnsafe?.user?.id || Math.floor(Math.random() * 100000),
-        username: tg.initDataUnsafe?.user?.username || 'pc_user',
-        first_name: tg.initDataUnsafe?.user?.first_name || 'Гость ПК'
-    };
+            let filtered = filter === 'all' 
+                ? businesses 
+                : businesses.filter(b => b.type.toLowerCase() === filter.toLowerCase());
 
-    let balance = 100;
-    let clickPower = 1;
-    let passivePower = 0;
-    
-    let upgrade1Cost = 50;
-    let upgrade2Cost = 200;
+            countContainer.textContent = `${filtered.length} шт.`;
 
-    const balanceEl = document.getElementById('balance');
-    const clickPowerEl = document.getElementById('clickPower');
-    const passivePowerEl = document.getElementById('passivePower');
-    const clickBtn = document.getElementById('clickBtn');
-
-    // Укажи здесь адрес своего Python-сервера (когда запустишь его в сети)
-    const SERVER_URL = 'http://172.18.0.6:5000';
-
-    // Загрузка данных пользователя с сервера при старте
-    async function initGame() {
-        try {
-            let response = await fetch(`${SERVER_URL}/api/user`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(userData)
-            });
-            let data = await response.json();
-            
-            balance = data.balance;
-            clickPower = data.click_power;
-            passivePower = data.passive_power;
-            updateUI();
-        } catch (e) {
-            console.log("Не удалось подключиться к серверу, работаем локально:", e);
-            updateUI();
-        }
-    }
-
-    // Сохранение прогресса на сервер
-    async function saveProgress() {
-        try {
-            await fetch(`${SERVER_URL}/api/update`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    telegram_id: userData.telegram_id,
-                    balance: balance,
-                    click_power: clickPower,
-                    passive_power: passivePower
-                })
-            });
-        } catch (e) {
-            console.log("Ошибка сохранения на сервер:", e);
-        }
-    }
-
-    // Клик по монете
-    clickBtn.addEventListener('click', () => {
-        balance += clickPower;
-        updateUI();
-        saveProgress();
-    });
-
-    // Покупка улучшений
-    function buyUpgrade(id) {
-        if (id === 1) {
-            if (balance >= upgrade1Cost) {
-                balance -= upgrade1Cost;
-                clickPower += 1;
-                upgrade1Cost = Math.floor(upgrade1Cost * 1.5);
-                document.getElementById('p1-cost').innerText = upgrade1Cost;
-            } else {
-                alert("Недостаточно средств!");
+            if (filtered.length === 0) {
+                listContainer.innerHTML = `<div class="no-results">В данной категории предприятий пока нет</div>`;
                 return;
             }
-        } else if (id === 2) {
-            if (balance >= upgrade2Cost) {
-                balance -= upgrade2Cost;
-                passivePower += 5;
-                upgrade2Cost = Math.floor(upgrade2Cost * 1.6);
-                document.getElementById('p2-cost').innerText = upgrade2Cost;
-            } else {
-                alert("Недостаточно средств!");
-                return;
-            }
+
+            filtered.forEach((biz, index) => {
+                const card = document.createElement('div');
+                card.className = 'business-card';
+                card.style.animationDelay = `${index * 0.05}s`;
+                card.innerHTML = `
+                    <div class="biz-header">
+                        <div class="biz-name">${biz.name}</div>
+                        <div class="biz-type-badge">${biz.type}</div>
+                    </div>
+                    <div class="biz-info">
+                        <div class="biz-info-row">📍 Локация: <span>${biz.location}</span></div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="discount-tag">Скидка: ${biz.discount}</div>
+                        <div class="owner-info">Владелец: <span>${biz.owner}</span></div>
+                    </div>
+                `;
+                listContainer.appendChild(card);
+            });
         }
-        updateUI();
-        saveProgress();
-    }
 
-    // Игра в казино
-    function playCasino() {
-        const cost = 100;
-        if (balance < cost) {
-            alert("Недостаточно монет для ставки!");
-            return;
+        function filterBusinesses(type, element) {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            element.classList.add('active');
+
+            document.getElementById('current-category-title').textContent = type === 'all' ? 'Все бизнесы' : `Категория: ${type}`;
+
+            renderBusinesses(type);
         }
-        balance -= cost;
 
-        const results = ['💎', '777', '🍋', '⭐️', '❌'];
-        const r1 = results[Math.floor(Math.random() * results.length)];
-        const r2 = results[Math.floor(Math.random() * results.length)];
-        
-        document.getElementById('slotResult').innerText = `${r1} | ${r2}`;
-
-        if (r1 === r2) {
-            let win = cost * 5;
-            balance += win;
-            alert(`Поздравляем! Вы выиграли ${win} Gold!`);
-        } else {
-            alert("Увы, ставка сгорела.");
-        }
-        updateUI();
-        saveProgress();
-    }
-
-    // Обновление интерфейса
-    function updateUI() {
-        balanceEl.innerText = balance;
-        clickPowerEl.innerText = clickPower;
-        passivePowerEl.innerText = passivePower;
-    }
-
-    // Пассивный доход каждую секунду
-    setInterval(() => {
-        if (passivePower > 0) {
-            balance += passivePower;
-            updateUI();
-            saveProgress();
-        }
-    }, 1000);
-
-    // Переключение вкладок
-    function switchTab(tabName, btn) {
-        document.querySelectorAll('.content').forEach(el => el.classList.remove('active'));
-        document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-
-        document.getElementById('tab-' + tabName).classList.add('active');
-        btn.classList.add('active');
-    }
-
-    // Запуск игры при открытии страницы
-    initGame();
-</script>
+        // Первичный запуск
+        renderBusinesses('all');
+    </script>
 </body>
 </html>
